@@ -1,0 +1,17 @@
+{% extends 'AGlob/base.html' %}
+
+{% block title %}
+    New Post
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">New Post</h1>
+    <div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-dark">Post</button>
+    </form>
+    </div>
+    <br><br>
+{% endblock %}
