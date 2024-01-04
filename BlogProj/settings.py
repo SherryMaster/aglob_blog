@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-4jqpyckn_w8k&#4)*-^@be+vtu3arj@5ym#-6c@!*u3lwbw^w^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'AGlob',
+    'members',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'BlogProj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [BASE_DIR / '']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -127,3 +128,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'AGlob:index'
+LOGOUT_REDIRECT_URL = 'AGlob:index'

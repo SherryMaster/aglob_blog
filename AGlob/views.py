@@ -8,30 +8,31 @@ from django.urls import reverse_lazy
 # Create your views here.
 class HomeView(ListView):
     model = Post
-    template_name = 'AGlob/index.html'
+    template_name = 'index.html'
     context_object_name = 'posts'
+    ordering = ['-id']
 
 
 class PostDetailView(DetailView):
     model = Post
-    template_name = 'AGlob/post_detail.html'
+    template_name = 'post_detail.html'
     context_object_name = 'post'
 
 
 class AddPostView(CreateView):
     model = Post
     form_class = CreatePostForm
-    template_name = 'AGlob/add_post.html'
+    template_name = 'add_post.html'
 
 
 class UpdatePostView(UpdateView):
     model = Post
     form_class = UpdatePostForm
-    template_name = 'AGlob/update_post.html'
+    template_name = 'update_post.html'
 
 
 
 class DeletePostView(DeleteView):
     model = Post
-    template_name = 'AGlob/post_detail.html'
+    template_name = 'post_detail.html'
     success_url = reverse_lazy('AGlob:index')

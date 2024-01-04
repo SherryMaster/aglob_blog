@@ -1,11 +1,11 @@
-{% extends 'AGlob/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
     {{ post.title_tag }}
 {% endblock %}
 
 {% block content %}
-    <h2>{{ post.title }} <span><a href="{% url 'AGlob:update_post' post.pk %}" class="btn btn-success">Edit</a></span></h2>
+    <h2>{{ post.title }}{% if user.is_authenticated and user == post.author %} <span><a href="{% url 'AGlob:update_post' post.pk %}" class="btn btn-success">Edit</a></span>{% endif %}</h2>
     <small>by {{ post.author }}</small>
     <hr class="my-4">
     <p>{{ post.content }}</p>
@@ -14,7 +14,9 @@
     <h5>updated at {{ post.updated_at }}</h5>
     <hr class="my-4">
     <a class="btn btn-primary" href="{% url 'AGlob:index' %}">Back</a>
+    {% if user.is_authenticated and user == post.author %}
     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" >Delete</button>
+    {% endif %}
 
     <div class="modal fade" id="deleteModal" tabindex="-1">
         <div class="modal-dialog">
