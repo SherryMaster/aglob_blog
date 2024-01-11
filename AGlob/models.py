@@ -4,9 +4,21 @@ from django.urls import reverse
 
 
 # Create your models here.
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('AGlob:category_list')
+
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     title_tag = models.CharField(max_length=100)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     summary = models.TextField()
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)

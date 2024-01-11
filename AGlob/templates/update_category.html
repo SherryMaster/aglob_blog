@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Update Post
+    Update Category
 {% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated and user == post.author %}
-    <h1 class="text-center">Update Post</h1>
+    {% if user.is_authenticated and user == category.author %}
+    <h1 class="text-center">Update Category</h1>
     <div class="form-group">
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-dark"><i class="fa-solid fa-floppy-disk"></i></button>
+        <button type="submit" class="btn btn-dark">Update</button>
     </form>
     </div>
     <br><br>
