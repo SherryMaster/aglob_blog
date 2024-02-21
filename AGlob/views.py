@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from AGlob.models import Post, Category
-from AGlob.forms import CreatePostForm, UpdatePostForm, CreateCategoryForm
+from AGlob.forms import CreatePostForm, UpdatePostForm, CategoryForm
 from django.urls import reverse_lazy
 
 
@@ -45,13 +45,13 @@ class CategoryListView(ListView):
 
 class AddCategoryView(CreateView):
     model = Category
-    form_class = CreateCategoryForm
+    form_class = CategoryForm
     template_name = 'add_category.html'
 
 
 class UpdateCategoryView(UpdateView):
     model = Category
-    form_class = CreateCategoryForm
+    form_class = CategoryForm
     template_name = 'update_category.html'
 
 

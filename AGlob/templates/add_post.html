@@ -18,4 +18,8 @@
         {% else %}
         <h1 class="text-center">404 Page Not Found</h1>
     {% endif %}
+
+    <script>
+            document.getElementById("author").value = {{ user.id }};
+    </script>
 {% endblock %}
