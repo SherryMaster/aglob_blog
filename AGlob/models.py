@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -19,8 +20,8 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     title_tag = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
-    summary = models.TextField()
-    content = models.TextField()
+    summary = RichTextField()
+    content = RichTextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

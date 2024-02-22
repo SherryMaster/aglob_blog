@@ -11,7 +11,7 @@
         <a class="text-decoration-none" href="{% url 'AGlob:post_detail' post.pk %}"><h2 style="display: inline"> {{ post.title }}</h2></a> by <span class="badge rounded-pill {% if post.author == user %}bg-primary{% else %}bg-secondary{% endif %} badge-md">{% if post.author == user %}You{% else %}{{ post.author }}{% endif %}</span><br>
         <a href="{% url 'AGlob:category_detail' post.category.pk %}"><span class="badge rounded-pill bg-secondary badge-sm">{{ post.category }}</span></a>
         <span class="badge rounded-pill bg-success badge-md">{{ post.likes.count }} likes</span>
-        <p>{{ post.summary }}</p>
+        <p>{{ post.summary|safe }}</p>
     </li>
 {% endfor %}
 </ul>
