@@ -18,6 +18,12 @@ class PostDetailView(DetailView):
     template_name = 'post_detail.html'
     context_object_name = 'post'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['likes'] = self.object.likes.count()
+        context['liked'] = self.object.likes.filter(id=self.request.user.id).exists()
+        return context
+
 
 class AddPostView(CreateView):
     model = Post

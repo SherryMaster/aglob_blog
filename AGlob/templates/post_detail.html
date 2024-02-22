@@ -12,7 +12,13 @@
     <br>
     <h5>created at {{ post.created_at }}</h5>
     <h5>updated at {{ post.updated_at }}</h5>
+
     <hr class="my-4">
+    {% if user.is_authenticated %}
+    <button id="like-post" class="btn {% if liked %} btn-success {% else %} btn-outline-success {% endif %}" onclick="like({% if liked %}0{% else %}1{% endif %})"><i class="fa-solid fa-thumbs-up"></i> {{ likes }}</button>
+    {% endif %}
+    <hr class="my-4">
+
     <a class="btn btn-primary" href="{% url 'AGlob:index' %}"><i class="fa-solid fa-arrow-left"></i></a>
     {% if user.is_authenticated and user == post.author %}
     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" ><i class="fa-solid fa-trash"></i></button>
@@ -40,32 +46,57 @@
     </div>
 
     <script>
-    // Whenever the modal appears a three second timer will be activated for delete disable, after that we can click the delete button otherwise not.
+        // delete modal timer for 3 seconds
+        {
+            // Whenever the modal appears a three second timer will be activated for delete disable, after that we can click the delete button otherwise not.
 
-    const deleteModal = document.getElementById('deleteModal')
-    let timer = null
+            const deleteModal = document.getElementById('deleteModal')
+            let timer = null
 
-    deleteModal.addEventListener('shown.bs.modal', () => {
-        let i = 5; // time to enable the delete button in seconds
-        deleteModal.querySelector('.btn-danger').disabled = true
-        deleteModal.querySelector('.btn-danger').innerHTML = `Delete (${i})`
-        // repeat the timer 3 time for 1s each time
-        timer = setInterval(() => {
-            i--
-            deleteModal.querySelector('.btn-danger').innerHTML = `Delete (${i})`
-            if (i < 1) {
+            deleteModal.addEventListener('shown.bs.modal', () => {
+                let i = 5; // time to enable the delete button in seconds
+                deleteModal.querySelector('.btn-danger').disabled = true
+                deleteModal.querySelector('.btn-danger').innerHTML = `Delete (${i})`
+                // repeat the timer 3 time for 1s each time
+                timer = setInterval(() => {
+                    i--
+                    deleteModal.querySelector('.btn-danger').innerHTML = `Delete (${i})`
+                    if (i < 1) {
+                        deleteModal.querySelector('.btn-danger').innerHTML = `Delete`
+                        deleteModal.querySelector('.btn-danger').disabled = false
+                        clearInterval(timer)
+                    }
+                }, 1000);
+            })
+
+            deleteModal.addEventListener('hidden.bs.modal', () => {
                 deleteModal.querySelector('.btn-danger').innerHTML = `Delete`
                 deleteModal.querySelector('.btn-danger').disabled = false
                 clearInterval(timer)
-            }
-        }, 1000);
-    })
+            })
+        }
 
-    deleteModal.addEventListener('hidden.bs.modal', () => {
-        deleteModal.querySelector('.btn-danger').innerHTML = `Delete`
-        deleteModal.querySelector('.btn-danger').disabled = false
-        clearInterval(timer)
-    })
+        // like
+        const likeBtn = document.getElementById('like-post')
+        function like(num) {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'AGlob:like_post_api' post.pk %}",
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    post_id: '{{ post.pk }}',
+                    num: num,
+                },
+                success: function (response) {
+                    // refresh the page
+                    location.reload();
+                },
+                error: function (response) {
+                    console.log(response)
+                }
+            });
+
+        }
     </script>
 
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from . import views, apis
 
 app_name = 'AGlob'
 
@@ -14,4 +14,6 @@ urlpatterns = [
     path('add_category', views.AddCategoryView.as_view(), name='add_category'),
     path('category/<int:pk>/update', views.UpdateCategoryView.as_view(), name='update_category'),
     path('category/<int:pk>/delete', views.DeleteCategoryView.as_view(), name='delete_category'),
+    # APIs
+    path('like_post/<int:pk>', apis.like_post, name='like_post_api'),
 ]
