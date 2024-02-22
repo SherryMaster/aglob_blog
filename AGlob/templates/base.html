@@ -13,7 +13,7 @@
   <body>
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg border-bottom border-body">
         <div class="container-fluid navbar-nav">
-            <a class="navbar-brand" href="{% url 'AGlob:index' %}">AGlob</a>
+            <a class="navbar-brand" href="{% url 'AGlob:index' %}">AGlob</a><span class="navbar-text">{% if user.is_authenticated %}<i class="fas fa-user"></i> {{ user.username }}{% endif %}</span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
