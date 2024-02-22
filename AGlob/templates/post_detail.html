@@ -16,6 +16,8 @@
     <hr class="my-4">
     {% if user.is_authenticated %}
     <button id="like-post" class="btn {% if liked %} btn-success {% else %} btn-outline-success {% endif %}" onclick="like({% if liked %}0{% else %}1{% endif %})"><i class="fa-solid fa-thumbs-up"></i> {{ likes }}</button>
+    {% else %}
+        <a class="btn btn-outline-success" href="{% url 'login' %}"><i class="fa-solid fa-thumbs-up"></i> {{ likes }}</a>
     {% endif %}
     <hr class="my-4">
 
