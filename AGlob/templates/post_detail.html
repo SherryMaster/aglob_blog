@@ -46,9 +46,9 @@
     </div>
 
     <script>
-        // delete modal timer for 3 seconds
+        // delete modal timer for 5 seconds
         {
-            // Whenever the modal appears a three second timer will be activated for delete disable, after that we can click the delete button otherwise not.
+            // Whenever the modal appears a 5 second timer will be activated for delete disable, after that we can click the delete button otherwise not.
 
             const deleteModal = document.getElementById('deleteModal')
             let timer = null
@@ -57,7 +57,7 @@
                 let i = 5; // time to enable the delete button in seconds
                 deleteModal.querySelector('.btn-danger').disabled = true
                 deleteModal.querySelector('.btn-danger').innerHTML = `Delete (${i})`
-                // repeat the timer 3 time for 1s each time
+                // repeat the timer 5 time for 1s each time
                 timer = setInterval(() => {
                     i--
                     deleteModal.querySelector('.btn-danger').innerHTML = `Delete (${i})`
