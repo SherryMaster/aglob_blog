@@ -7,8 +7,8 @@ from AGlob.models import Post
 
 def like_post(request, pk):
     post = Post.objects.get(id=request.POST.get('post_id'))
-    liked = int(request.POST.get('post_like'))
-    if liked:
+    number = int(request.POST.get('num'))
+    if number == 0:
         post.likes.remove(request.user)
     else:
         post.likes.add(request.user)
