@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ user.username }}'s Profile
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Welcome {{ user.username }}</h1>
+    <div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-dark">Update <i class="fa-solid fa-floppy-disk"></i></button>
+    </form>
+    </div>
+    <br><br>
+{% endblock %}
