@@ -17,6 +17,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+    header_image = models.ImageField(null=True, blank=True, upload_to='images/')
     title = models.CharField(max_length=100)
     title_tag = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)

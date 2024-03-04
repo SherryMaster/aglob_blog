@@ -8,6 +8,9 @@
     <h2>{{ post.title }}{% if user.is_authenticated and user == post.author %} <span><a href="{% url 'AGlob:update_post' post.pk %}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a></span>{% endif %}</h2>
     <small>by {{ post.author }}</small>
     <hr class="my-4">
+    {% if post.header_image %}
+        <img src="{{ post.header_image.url }}" alt="{{ post.title }} image" class="img-fluid">
+    {% endif %}
     <p>{{ post.content|safe }}</p>
     <br>
     <h5>created at {{ post.created_at }}</h5>

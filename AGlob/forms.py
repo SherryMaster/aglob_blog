@@ -16,9 +16,10 @@ class CategoryForm(forms.ModelForm):
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('author', 'title', 'title_tag', 'category', 'summary', 'content')
+        fields = ('author', 'header_image', 'title', 'title_tag', 'category', 'summary', 'content')
 
         widgets = {
+            'header_image': forms.FileInput(attrs={'class': 'form-control'}),
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter title here'}),
             'title_tag': forms.TextInput(attrs={'class': 'form-control'}),
             'summary': forms.Textarea(attrs={'class': 'form-control'}),
